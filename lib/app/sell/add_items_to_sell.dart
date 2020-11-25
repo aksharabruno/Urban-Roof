@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:urban_roof/app/common/constants.dart';
 
 class AddItemsToSell extends StatelessWidget{
   @override
@@ -8,60 +9,36 @@ class AddItemsToSell extends StatelessWidget{
         title: Text('Sell'),
         backgroundColor: Colors.teal[800],
         elevation: 2.0,
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            onSelected: choiceAction,
+            itemBuilder: (BuildContext context){
+              return Constants.choices.map((String choice){
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: 
+                    RaisedButton(
+                      child: Text(choice),
+                      onPressed: (){
+                        Navigator.pushReplacementNamed(context, choiceAction(choice));
+                      }
+                    ),
+                );
+              }).toList();
+            },
+          )
+        ],
       ),
-      body: Center(
-        child: Container(
-          padding: EdgeInsets.all(80.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text(
-                'This is the place to sell',
-                style: TextStyle(
-                  color: Colors.teal[800], 
-                  fontSize: 25.0,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 8.0),
-              
-              SizedBox(height: 8.0),
-              RaisedButton(
-                child: Image.asset('images/vegetables.png'),
-                color: Colors.white,
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/catalog');
-                }
-              ),
-              SizedBox(height: 8.0),
-              Text(
-                'Vegetables',
-                style: TextStyle(
-                  color: Colors.teal[800], 
-                  fontSize: 20.0,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 20.0),
-              RaisedButton(
-                child: Image.asset('images/saplings.jpg'),
-                color: Colors.white,
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/catalog');
-                }
-              ),
-              SizedBox(height: 8.0),
-              Text(
-                'Saplings',
-                style: TextStyle(
-                  color: Colors.teal[800], 
-                  fontSize: 20.0,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],)
-        )
-      ),
+      body: Text('Add your items here to sell'),
     );
+  }
+
+  String choiceAction(String choice){
+    if(choice == Constants.Buy){
+      return '/maincatalog';
+    } else if(choice == Constants.Sell){
+      return '/additemstosell';
+    }
+    return null;
   }
 }
