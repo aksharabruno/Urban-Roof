@@ -1,6 +1,6 @@
 # urban_roof
 
-A new Flutter project.
+An app to promote roof top gardening and small scale businesses.
 
 ## Getting Started
 
