@@ -1,33 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:urban_roof/app/common/Constants.dart';
 
-class MainCatalog extends StatelessWidget{
+class AddItemsToSell extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text('Main Catalog'),
+        title: Text('Sell'),
         backgroundColor: Colors.teal[800],
         elevation: 2.0,
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            onSelected: choiceAction,
-            itemBuilder: (BuildContext context){
-              return Constants.choices.map((String choice){
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: 
-                    RaisedButton(
-                      child: Text(choice),
-                      onPressed: (){
-                        Navigator.pushReplacementNamed(context, choiceAction(choice));
-                      }
-                    ),
-                );
-              }).toList();
-            },
-          )
-        ],
       ),
       body: Center(
         child: Container(
@@ -36,7 +16,7 @@ class MainCatalog extends StatelessWidget{
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                'What would you like to buy?',
+                'This is the place to sell',
                 style: TextStyle(
                   color: Colors.teal[800], 
                   fontSize: 25.0,
@@ -83,12 +63,5 @@ class MainCatalog extends StatelessWidget{
         )
       ),
     );
-  }
-
-  String choiceAction(String choice){
-    if(choice == Constants.Buy){
-      return '/maincatalog';
-    }
-    return null;
   }
 }

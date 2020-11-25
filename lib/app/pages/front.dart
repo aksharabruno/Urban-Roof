@@ -4,6 +4,7 @@ class Front extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -52,6 +53,8 @@ class Front extends StatelessWidget{
       ),
     );
   }
+
+
+  // ignore: missing_return
+  
 }
-
-
