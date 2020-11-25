@@ -6,7 +6,7 @@ import 'package:urban_roof/app/pages/buy/vegetable_catalog.dart';
 import 'package:urban_roof/app/pages/buy/main_catalog.dart';
 import 'package:urban_roof/app/pages/front.dart';
 import 'package:urban_roof/app/pages/cart.dart';
-import 'package:urban_roof/app/sell/add_items_to_sell.dart';
+import 'package:urban_roof/app/pages/sell/add_items_to_sell.dart';
 
 void main() {
   runApp(MyApp());
