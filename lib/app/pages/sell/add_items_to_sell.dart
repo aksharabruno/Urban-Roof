@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:urban_roof/app/common/constants.dart';
 
-class AddItemsToSell extends StatelessWidget{
+class AddItemsToSell extends StatefulWidget{
+ 
+  @override
+  _AddItemsToSell createState() => _AddItemsToSell();
+
+}
+
+class _AddItemsToSell extends State<AddItemsToSell> {
+  var name;
+  var qty;
+  var price;
+
+  final nameCon = new TextEditingController();
+  final qtyCon = new TextEditingController();
+  final priceCon = new TextEditingController();
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -29,7 +44,45 @@ class AddItemsToSell extends StatelessWidget{
           )
         ],
       ),
-      body: Text('Add your items here to sell'),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextField(
+                controller: nameCon,
+                decoration: InputDecoration(
+                  hintText: 'Enter the name of the item'
+                ),
+              ),
+              TextField(
+                controller: qtyCon,
+                decoration: InputDecoration(
+                  hintText: 'Enter the quantity'
+                ),
+              ),
+              TextField(
+                controller: priceCon,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: 'Enter the price'
+                ),
+              ),
+              RaisedButton(onPressed: () {
+                setState((){
+                  name = nameCon.text;
+                  qty = qtyCon.text;
+                  price = priceCon.text;
+                });
+                Navigator.pushReplacementNamed(context, '/allitems');
+              },
+                child: Text('Submit'),
+              ),
+            ],
+          )
+        )
+      ),
     );
   }
 

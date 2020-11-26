@@ -7,6 +7,7 @@ import 'package:urban_roof/app/pages/buy/main_catalog.dart';
 import 'package:urban_roof/app/pages/front.dart';
 import 'package:urban_roof/app/pages/cart.dart';
 import 'package:urban_roof/app/pages/sell/add_items_to_sell.dart';
+import 'package:urban_roof/app/pages/sell/all_items.dart';
 
 void main() {
   runApp(MyApp());
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
           '/catalog': (context) => MyCatalog(),
           '/cart': (context) => MyCart(),
           '/additemstosell': (context) => AddItemsToSell(),
+          '/allitems' : (context) => AllItems(),
         },
       ),
     );
