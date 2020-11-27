@@ -1,33 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:urban_roof/app/common/constants.dart';
 
 class MainCatalog extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+    drawer: Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Text('Hope you\'re having a good day'),
+            decoration: BoxDecoration(color: Colors.green),
+          ),
+          ListTile(
+            title: Text('Home'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/maincatalog');
+            },
+          ),
+          ListTile(
+            title: Text('Grow'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: Text('Buy'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text('Sell'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/additemstosell');
+            },
+          ),
+          ListTile(
+            title: Text('Profile'),
+            onTap: () {},
+          ),
+        ]
+      )
+    ),
       appBar: AppBar(
         title: Text('Main Catalog'),
         backgroundColor: Colors.teal[800],
         elevation: 2.0,
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            onSelected: choiceAction,
-            itemBuilder: (BuildContext context){
-              return Constants.choices.map((String choice){
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: 
-                    RaisedButton(
-                      child: Text(choice),
-                      onPressed: (){
-                        Navigator.pushReplacementNamed(context, choiceAction(choice));
-                      }
-                    ),
-                );
-              }).toList();
-            },
-          )
-        ],
       ),
       body: Padding(
               padding: EdgeInsets.all(30.0), //padding
@@ -116,14 +133,5 @@ class MainCatalog extends StatelessWidget{
               ) 
             )
     );
-  }
-
-  String choiceAction(String choice){
-    if(choice == Constants.Buy){
-      return null;
-    } else if(choice == Constants.Sell){
-      return '/additemstosell';
-    }
-    return null;
   }
 }

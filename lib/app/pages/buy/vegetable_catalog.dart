@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:urban_roof/app/common/constants.dart';
 import 'package:urban_roof/app/models/cart.dart';
 import 'package:urban_roof/app/models/catalog.dart';
 
@@ -58,33 +57,8 @@ class _MyAppBar extends StatelessWidget {
           icon: Icon(Icons.shopping_cart),
           onPressed: () => Navigator.pushNamed(context, '/cart'),
         ),
-        PopupMenuButton<String>(
-            onSelected: choiceAction,
-            itemBuilder: (BuildContext context){
-              return Constants.choices.map((String choice){
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: 
-                    RaisedButton(
-                      child: Text(choice),
-                      onPressed: (){
-                        Navigator.pushReplacementNamed(context, choiceAction(choice));
-                      }
-                    ),
-                );
-              }).toList();
-            },
-          ),
       ],
     );
-  }
-  String choiceAction(String choice){
-    if(choice == Constants.Buy){
-      return '/maincatalog';
-    } else if(choice == Constants.Sell){
-      return '/additemstosell';
-    }
-    return null;
   }
 }
 
