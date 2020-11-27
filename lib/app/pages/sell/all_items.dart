@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AllItems extends StatelessWidget{
-
-
   @override
   Widget build(BuildContext context) {
-    Scaffold(
+    return Scaffold(
     drawer: Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -17,7 +15,7 @@ class AllItems extends StatelessWidget{
           ListTile(
             title: Text('Item 1'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, '/maincatalog');
             },
           ),
           ListTile(
@@ -30,8 +28,12 @@ class AllItems extends StatelessWidget{
           ),
         ]
       )
-    )
+    ),
+    appBar: AppBar(
+      title: Text('All Items'),
+      backgroundColor: Colors.teal[800],
+      elevation: 2.0,
+    ),
   );
-  return null;
   }
 }
