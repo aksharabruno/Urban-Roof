@@ -1,137 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:urban_roof/app/common/drawer_element.dart';
 
 class MainCatalog extends StatelessWidget{
+  final String usrnm = 'username123';
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-    drawer: Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Text('Hope you\'re having a good day'),
-            decoration: BoxDecoration(color: Colors.green),
-          ),
-          ListTile(
-            title: Text('Home'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/maincatalog');
-            },
-          ),
-          ListTile(
-            title: Text('Grow'),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('Buy'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: Text('Sell'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/additemstosell');
-            },
-          ),
-          ListTile(
-            title: Text('Profile'),
-            onTap: () {},
-          ),
-        ]
-      )
-    ),
+      drawer: DrawerElement(),
       appBar: AppBar(
-        title: Text('Main Catalog'),
+        title: Text('Buy'),
         backgroundColor: Colors.teal[800],
         elevation: 2.0,
-      ),
-      body: Padding(
-              padding: EdgeInsets.all(30.0), //padding
-              child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                  Text(
-                    'What would you like to buy?',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 48.0),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/catalog');
-                    },
-                    color: Theme.of(context).accentColor,
-                    child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Vegetables',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                    ),
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                    },
-                    color: Theme.of(context).accentColor,
-                    child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Saplings',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                    ),
-                  ),
-                  RaisedButton(
-                    onPressed: () {},
-                    color: Theme.of(context).accentColor,
-                    child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Seeds',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                    ),
-                  ),
-  
-                  SizedBox(height: 8.0),
-                ],
-              ) 
+        actions: <Widget>[
+          Container(
+            height: 15.0,
+            child: RaisedButton(
+              child: Text('All produce'),
+              elevation: 2.0,
+              color: Colors.teal,
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/allitems');
+              }
             )
-    );
+          ) 
+        ],
+      ),
+      body: CustomScrollView(
+      primary: false,
+      slivers: <Widget>[
+        SliverPadding(
+          padding: const EdgeInsets.all(20),
+          sliver: SliverGrid.count(
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            crossAxisCount: 2,
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Text("He'd have you all unravel at the"),
+                decoration: myBoxDecoration(),
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Text('Heed not the rabble'),
+                
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Text('Sound of screams but the'),
+                
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Text('Who scream'),
+                
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Text('Revolution is coming...'),
+                
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                child: Text('Revolution, they...'),
+                
+              ),
+            ],
+          ),
+        ),
+      ],
+    )
+  );
+    
   }
+}
+
+BoxDecoration myBoxDecoration(){
+  return BoxDecoration(
+    border: Border.all(
+      color: Colors.teal,
+      width: 5.0,
+    ),
+    borderRadius: BorderRadius.all(
+      Radius.circular(15.0)
+    )
+  );
 }
