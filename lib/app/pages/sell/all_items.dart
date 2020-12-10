@@ -1,44 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:urban_roof/app/common/drawer_element.dart';
 
 class AllItems extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    drawer: Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Text('Hope you\'re having a good day!'),
-            decoration: BoxDecoration(color: Colors.green),
-          ),
-          ListTile(
-            title: Text('Home'),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('Grow'),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('Buy'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/catalog');
-            },
-          ),
-          ListTile(
-            title: Text('Sell'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/additemstosell');
-            },
-          ),
-          ListTile(
-            title: Text('Profile'),
-            onTap: () {},
-          ),
-        ]
-      )
-    ),
+    drawer: DrawerElement(),
     appBar: AppBar(
       title: Text('All Produce'),
       backgroundColor: Colors.teal[800],
