@@ -82,7 +82,7 @@ class _AddItemsToSell extends State<AddItemsToSell> {
               padding: const EdgeInsets.all(10.0),
               decoration: myBoxDecoration(),
               child: Text(
-                "I'm using Flutter and I'd like to add a border to a widget (in this case, a Text widget)I tried TextStyle and Text, but I didn't see how to add a border",
+                "Always hoping to promote small businesses like yours! Because every one deserves the equal chance :)",
                 style: TextStyle(fontSize: 20.0),
               ),
             ),
