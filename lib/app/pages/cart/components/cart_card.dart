@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:urban_roof/app/models/cart1.dart';
+//import 'package:urban_roof/app/models/cart1.dart';
+import 'package:urban_roof/app/pages/buy/single_item_view.dart';
 import 'package:urban_roof/app/pages/constants.dart';
 //import '../../size_config.dart';
 
@@ -9,7 +10,7 @@ class CartCard extends StatelessWidget {
     @required this.cart,
   }) : super(key: key);
 
-  final Cart cart;
+  final Added cart;
 
   @override
   Widget build(BuildContext context) {
