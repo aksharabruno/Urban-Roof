@@ -26,10 +26,10 @@ class MainCategory extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               buildContainerBottomNav(Icons.ballot, 'allitems', context),
-                              buildContainerBottomNav(Icons.notifications_on_rounded, '', context),
+                              buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
                               buildContainerBottomNav(Icons.home, 'home', context),
                               buildContainerBottomNav(Icons.person, 'profile', context),
-                              buildContainerBottomNav(Icons.shopping_cart, '', context, isSelected: true),
+                              buildContainerBottomNav(Icons.shopping_cart, 'maincategory', context, isSelected: true),
                             ],
                           ),
                         )),
