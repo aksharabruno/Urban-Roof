@@ -1,7 +1,109 @@
 import 'package:flutter/material.dart';
-import 'package:urban_roof/app/models/cart1.dart';
-import 'package:urban_roof/app/models/product.dart';
-import 'package:urban_roof/app/pages/buy/cart_counter.dart';
+//import 'package:urban_roof/app/models/cart1.dart';
+//import 'package:urban_roof/app/models/product.dart';
+//import 'package:urban_roof/app/pages/buy/cart_counter.dart';
+
+
+class Product {
+  final int id;
+  final String title, seller, address, qty, type;
+  final List<String> images;
+  final price;
+  final String phone;
+
+  Product({
+    @required this.id,
+    @required this.images,
+    @required this.title,
+    @required this.price,
+    @required this.seller,
+    @required this.address,
+    @required this.phone,
+    @required this.qty,
+    @required this.type,
+  });
+}
+
+
+class Added {
+  int index = 0;
+  double total = 0;
+  final Product product;
+  int numOfItem;
+
+  Added({@required this.product, @required this.numOfItem});
+
+  double totalvalue(){
+    for (Added p in addedList){
+      total += p.product.price * p.numOfItem;
+    }
+    return total;
+  }
+}
+
+
+List<Added> addedList = [];
+
+
+class CartCounter extends StatefulWidget {
+  @override
+  _CartCounterState createState() => _CartCounterState();
+}
+
+class _CartCounterState extends State<CartCounter> {
+  int numOfItems = 1;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        buildOutlineButton(
+          icon: Icons.remove,
+          press: () {
+            if (numOfItems > 1) {
+              setState(() {
+                numOfItems--;
+              });
+            }
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            // if our item is less  then 10 then  it shows 01 02 like that
+            numOfItems.toString().padLeft(2, "0"),
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ),
+        buildOutlineButton(
+            icon: Icons.add,
+            press: () {
+              setState(() {
+                numOfItems++;
+              });
+            }),
+      ],
+    );
+  }
+
+  SizedBox buildOutlineButton({IconData icon, Function press}) {
+    return SizedBox(
+      width: 40,
+      height: 32,
+      child: OutlineButton(
+        padding: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(13),
+        ),
+        onPressed: press,
+        child: Icon(icon),
+      ),
+    );
+  }
+
+  int totalnumber(){
+    return numOfItems;
+  }
+}
 
 class SingleItemView extends StatelessWidget {
   final String type;
@@ -11,10 +113,16 @@ class SingleItemView extends StatelessWidget {
   final double qty;
   final double price;
   final String seller;
-  SingleItemView({this.type, this.image, this.title, this.context, this.qty, this.price, this.seller});
+  final String address;
+  final String desc;
+
+  SingleItemView({this.type, this.image, this.title, this.context, this.qty, this.price, this.seller, this.address, this.desc});
   
   @override
   Widget build(BuildContext context) {
+    bool cond = true;
+    
+    int n = 0;
     return Scaffold(
         body: Stack(
       children: [
@@ -95,12 +203,6 @@ class SingleItemView extends StatelessWidget {
               ],)),
               SizedBox(height: 5.0,),
             Container(
-              /*decoration: BoxDecoration(
-             color:Colors.white,
-             borderRadius: BorderRadius.only(
-              topLeft:Radius.circular(10),
-             topRight:Radius.circular(10),),
-          ),*/
             decoration: BoxDecoration(
               color: Colors.green,
               borderRadius: BorderRadius.only(
@@ -115,36 +217,35 @@ class SingleItemView extends StatelessWidget {
             child:Row(
               mainAxisAlignment:MainAxisAlignment.spaceEvenly,
               children: [
-              
               FlatButton.icon(onPressed: (){
+                _CartCounterState c = new _CartCounterState();
+                n = c.totalnumber();
                 Product p = new Product(
                   id: 1,
-                  images: [
-                    "assets/images/vegetabletomato.jpg",
-                  ],
-                  colors: [
-                    Color(0xFFF6625E),
-                    Color(0xFF836DB8),
-                    Color(0xFFDECB9C),
-                    Colors.white,
-                  ],
-                  title: "Tomato",
-                  price: 50,
+                  title: title,
                   seller: seller,
-                  rating: 4.8,
+                  address: 'some address',
+                  qty: '$qty',
+                  images: ["assets/images/$type$image.jpg"],
+                  price: price,
+                  phone: '9999999999',
+                  type: type
                 );
-               // Cart(product: p, numOfItem: 2);
-                
-                
-                //Cart.additem(P,2);
-                /*Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) {
-                  return SingleItemView(type:type, image:image, title:title, context:context, qty:qty, price:price, seller:seller);
-              },)*/},
-              icon:Icon(Icons.shopping_basket, color:Colors.white,),
-              label: Text("Add to cart", style: TextStyle(color: Colors.white, fontSize: 20.0),),
+                Added obj = new Added(product: (p), numOfItem: n);
+                addedList.addAll({obj});
+                setState(() { 
+                  cond = false;
+                });
+                showAlertDialog(context);
+               },
+               
+              icon: cond ? Icon(Icons.shopping_basket, color:Colors.white,) : Icon(Icons.check, color:Colors.white,),
+              label: cond ? Text('Add to cart', style: TextStyle(color: Colors.white, fontSize: 20.0),) : Text('Added', style: TextStyle(color: Colors.white, fontSize: 20.0),),
               color:Colors.green,
-              shape:StadiumBorder(),)
+              shape:StadiumBorder(),
+
+              ),
+              
               /*padding:EdgeInsets.symmetric(
                 horizontal:MediaQuery.of(context).size.width/10,
                 vertical:10))*/
@@ -155,5 +256,28 @@ class SingleItemView extends StatelessWidget {
       ],
     ));
   }
+
+  void setState(Null Function() param0) {}
 }
 
+showAlertDialog(BuildContext context){
+  Widget continueButton = FlatButton(
+    
+    child: Icon(Icons.check, color: Colors.green[900],),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+  AlertDialog alert = AlertDialog(
+    title: Text("Item added to cart", textAlign: TextAlign.center,),
+    actions: [
+      continueButton,
+    ],
+  );
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    }
+  );
+}
