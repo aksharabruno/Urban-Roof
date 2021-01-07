@@ -22,8 +22,9 @@ class _SignupPageState extends State<SignupPage> {
   //String final_response ='';
   final _formkey = GlobalKey<FormState>();
   
-  
+   
   Future<void> _savingData() async {
+    print("hi!");
     final validation = _formkey.currentState.validate();
 
     if(!validation){
@@ -35,6 +36,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+       
         resizeToAvoidBottomPadding: false,
         body: SingleChildScrollView(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
@@ -62,7 +64,7 @@ class _SignupPageState extends State<SignupPage> {
                 )
               ],
             ),
-          ),
+          ), 
           Container(
             padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
             child: Builder(
@@ -104,7 +106,6 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   SizedBox(height: 10.0),
                   TextFormField(
-                   
                     controller: mobCon,
                     autofocus: true,
                     decoration: InputDecoration(
@@ -191,19 +192,25 @@ class _SignupPageState extends State<SignupPage> {
                               age = int.parse(ageCon.text);
                               username = unCon.text; 
                               password = pwCon.text;
+                              
                             });
-                            
-                            _savingData();
-                            final url = 'http://10.0.2.2:5000/signup';
-                            var data = {'Name': name, 'Address': address, 'Mobile Number': mob, 'Age': age, 'Username': username, 'Password': password};
-                            final response = await http.post(url, body: json.encode(data));
-                            print(response);
+                            print('hi');
+                            /*_savingData();
+                            //final url = 'http://10.0.2.2:5000/signup';
+                            //var data = {'Name': name, 'Address': address, 'Mobile Number': mob, 'Age': age, 'Username': username, 'Password': password};
+                            //print(data);
+                            var response = await http.post('http://127.0.0.1:5000/signup', headers: {"content-type": "application/json"},
+                            body: json.encode({"Name": name, "Address": address, "Mobile Number": mob, "Age": age, "Username": username, "Password": password}));
+                            //final response = await http.post(url, body: json.encode({'Name': 'adi'}));
+                            print('hey');
+                            print(response);*/
                             Navigator.of(context).pushNamed('/home');
-                            if(response.statusCode == 200){
+                            /*if(response.statusCode == 200){
                               Navigator.of(context).pushNamed('/home');
                             } else {
                               print('error');
                             }
+                            Navigator.pushReplacementNamed(context,'/home');*/
                             //http.close();
                           },
                           
@@ -243,3 +250,4 @@ class _SignupPageState extends State<SignupPage> {
         ])));
   }
 }
+
