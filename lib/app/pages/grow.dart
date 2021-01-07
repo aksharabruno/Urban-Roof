@@ -1,408 +1,71 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:urban_roof/app/common/common_widgets.dart';
-import 'package:urban_roof/app/pages/growdetails.dart';
 
-class MyCrops extends StatelessWidget {
+class GrowDetailsPage extends StatelessWidget {
+  final String image;
+  final String title;
+  final BuildContext context;
+  GrowDetailsPage({this.image, this.title, this.context});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          bottomNavigationBar: Container(
-              height: 55,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey[300],
-                          blurRadius: 20,
-                          spreadRadius: 1)
-                    ]),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildContainerBottomNav(Icons.ballot, 'allitems', context),
-                    buildContainerBottomNav(Icons.notifications_on_rounded, '', context),
-                    buildContainerBottomNav(Icons.home, '', context, isSelected: true),
-                    buildContainerBottomNav(Icons.person, 'profile', context),
-                    buildContainerBottomNav(Icons.shopping_cart, 'maincategory', context),
-                  ],
-                ),
-              )),
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.green,
-            elevation: 0,
-            leading: Builder(builder: (BuildContext context) {
-              return IconButton(
-                icon: Container(child: Icon(Icons.menu)),
-                onPressed: () {},
-              );
-            }),
-            title: Text(
-              "Urban Roof",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            actions: <Widget>[
-              IconButton(
-                icon: Container(child: Icon(Icons.search)),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          body: Column(
-            children: [
-              SizedBox(
-                height: 8,
-              ),
-              Padding(padding: new EdgeInsets.all(5)),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Padding(padding: new EdgeInsets.all(2)),
-                  Text("Start your Farm",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5,
-                      )),
-                ],
-              ),
-              SizedBox(
-                height: 13,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  buildFlatButton("Blogs"),
-                  buildFlatButton("Crops", isSelected: true),
-                  buildFlatButton("Reviews"),
-                ],
-              ),
-              SizedBox(
-                height: 13,
-              ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius:
-                          BorderRadius.only(topLeft: Radius.circular(40)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey[350],
-                          spreadRadius: 1,
-                          blurRadius: 15,
-                        )
-                      ]),
-                  child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            buildColumnAtTop("Top", isSelected: true),
-                            buildColumnAtTop("Popular"),
-                            buildColumnAtTop("Trending"),
-                            buildColumnAtTop("Recommended for you"),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        MycropList(),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        LineBar(),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Beginner Special",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Spacer(),
-                              Text(
-                                "View All",
-                                style:
-                                    TextStyle(fontSize: 15, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                        ),
-                        SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              buildBottomContainer("4", "Chilli", "Author"),
-                              buildBottomContainer("5", "Spinach", "Author"),
-                              buildBottomContainer("6", "Tomato", "Author"),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        LineBar2(),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ));
-  }
-
- /* Container buildContainerBottomNav(IconData icon, {bool isSelected = false}) {
-    return Container(
-        decoration: BoxDecoration(
-          color: isSelected ? Colors.white : Colors.green,
-          shape: BoxShape.circle,
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: Colors.grey[500],
-                    blurRadius: 9,
-                    spreadRadius: 1,
-                  ),
-                ]
-              : [],
-        ),
-        height: 50,
-        width: 50,
-        child: Icon(icon,
-            color: isSelected ? Colors.green : Colors.white, size: 30));
-  }*/
-
-  Container buildBottomContainer(String image, String text1, String text2) {
-    return Container(
-        height: 150,
-        width: 240,
-        margin: EdgeInsets.only(left: 20),
-        child: Row(
-          children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: SizedBox(
-                    height: 130,
-                    width: 100,
-                    child: Image.asset("assets/images/crop$image.JPG",
-                        fit: BoxFit.cover))),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    text1,
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    text2,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey,
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
-        ));
-  }
-
-  Column buildColumnAtTop(String text, {bool isSelected = false}) {
-    return Column(
+    return Scaffold(
+        body: Stack(
+         alignment: Alignment.topCenter,
       children: [
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 18,
-            color: isSelected ? Colors.green[800] : Colors.grey,
-            letterSpacing: 0.5,
+        
+        Image.asset("assets/images/crop$image.JPG",
+         
+            width: MediaQuery.of(context).size.width/2,
+            fit: BoxFit.cover,
+            height: MediaQuery.of(context).size.height /3),
+        IconButton(
+          padding: EdgeInsets.only(left: 10, top: 30),
+          icon: Icon(
+            Icons.close,
+            color: Colors.white,
           ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
-        if (isSelected)
-          Container(
-              width: 5,
-              height: 5,
-              decoration: BoxDecoration(
-                color: Colors.green[800],
-                shape: BoxShape.circle,
-              ))
-      ],
-    );
-  }
-
-  FlatButton buildFlatButton(String text, {bool isSelected = false}) {
-    return FlatButton(
-      onPressed: () {
-        print("Button pressed");
-      },
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 15,
-          color: isSelected ? Colors.white : Colors.black,
-          letterSpacing: 0.5,
-        ),
-      ),
-      shape: StadiumBorder(),
-      color: isSelected ? Colors.lightGreen : Colors.grey[300],
-    );
-  }
-}
-
-class MycropList extends StatelessWidget {
-  const MycropList({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          SizedBox(
-            width: 20,
-          ),
-          buildColumnWithRow("1", "Okra", context),
-          buildColumnWithRow("2", "Brinjal", context),
-          buildColumnWithRow("3", "Peas", context),
-        ],
-      ),
-    );
-  }
-
-  GestureDetector buildColumnWithRow(
-      String image, String title, BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return GrowDetailsPage(image: image, title: title, context: context);
-        }));
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Container(
-              height: 150,
-              width: 120,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: (Image.asset(
-                  "assets/images/crop$image.JPG",
-                  fit: BoxFit.cover,
-                )),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: MediaQuery.of(context).size.height / 2.6,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
               ),
             ),
-            SizedBox(
-              height: 20,
+            child: Column(
+              children: [
+                Expanded(
+                    child: Column(
+                  children: [],
+                )),
+                Container(
+                    height: 60,
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.green,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "Read More...",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        )
+                      ],
+                    ))
+              ],
             ),
-            Text(
-              title,
-              style: TextStyle(fontSize: 16),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class LineBar2 extends StatelessWidget {
-  const LineBar2({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 5,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          bottomLeft: Radius.circular(10),
-        ),
-      ),
-      margin: EdgeInsets.only(left: 25),
-      alignment: Alignment.centerLeft,
-      child: Container(
-        height: 5,
-        width: 100,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10),
-            bottomLeft: Radius.circular(10),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class LineBar extends StatelessWidget {
-  const LineBar({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 5,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.only(left: 25),
-      alignment: Alignment.centerLeft,
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          bottomLeft: Radius.circular(10),
-        ),
-      ),
-      child: Container(
-        height: 5,
-        width: 100,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10),
-            bottomLeft: Radius.circular(10),
-          ),
-        ),
-      ),
-    );
+      ],
+    ));
   }
 }
