@@ -29,8 +29,8 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     buildContainerBottomNav(Icons.ballot, 'allitems', context),
-                    buildContainerBottomNav(Icons.notifications_on_rounded, '', context),
-                    buildContainerBottomNav(Icons.home, '', context, isSelected: true),
+                    buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
+                    buildContainerBottomNav(Icons.home, 'home', context, isSelected: true),
                     buildContainerBottomNav(Icons.person, 'profile', context),
                     buildContainerBottomNav(Icons.shopping_cart, 'maincategory', context),
                   ],
@@ -87,13 +87,9 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buildFlatButton("Blogs", isSelected: true),
-                  GestureDetector (
-                    onTap: (){
-                      //Navigator.pushReplacementNamed(context, '/grow'); //some error
-                    },
-                    child: buildFlatButton("Grow")),
-                  buildFlatButton("Reviews"),
+                  buildFlatButton("Blogs", context, 'home', isSelected: true),
+                  buildFlatButton("Grow", context, 'grow'),
+                  buildFlatButton("Reviews", context, 'home'),
                 ],
               ),
               SizedBox(
@@ -249,10 +245,10 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  FlatButton buildFlatButton(String text, {bool isSelected = false}) {
+  FlatButton buildFlatButton(String text,  BuildContext context, String route, {bool isSelected = false}) {
     return FlatButton(
       onPressed: () {
-        print("Button pressed");
+        Navigator.pushReplacementNamed(context, '/$route');
       },
       child: Text(
         text,
