@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -6,6 +8,24 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  String username = "";
+  String password = "";
+  //String final_response = "";
+  final _formkey1 = GlobalKey<FormState>();
+  final _formkey2 = GlobalKey<FormState>();
+
+  //final unCon = new TextEditingController();
+  //final pwCon = new TextEditingController();
+
+  Future<void> _savingData() async {
+    final validation1 = _formkey1.currentState.validate();
+    final validation2 = _formkey2.currentState.validate();
+    if(!validation1 && !validation2){
+      return;
+    }
+    _formkey1.currentState.save();
+    _formkey2.currentState.save();
+  }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -17,6 +37,7 @@ class _FirstPageState extends State<FirstPage> {
             Container(
               child: Stack(
                 children: <Widget>[
+                  
                   Container(
                     padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
                     child: Text('Welcome to',
@@ -34,22 +55,29 @@ class _FirstPageState extends State<FirstPage> {
                 ],
               ),
             ),
+            SizedBox(height:50.0),
             Container(
                 padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                 child: Column(
+                  
                   children: <Widget>[
-                    TextField(
+                    TextFormField(
+                      key: _formkey1,
+                     // controller: unCon,
                       decoration: InputDecoration(
-                          labelText: 'EMAIL',
+                          labelText: 'USERNAME',
                           labelStyle: TextStyle(
                               fontFamily: 'Raleway',
                               fontWeight: FontWeight.bold,
                               color: Colors.grey),
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.green))),
+                      onSaved: (value){username = value;},
                     ),
                     SizedBox(height: 20.0),
-                    TextField(
+                    TextFormField(
+                      key: _formkey2,
+                      //controller: pwCon,
                       decoration: InputDecoration(
                           labelText: 'PASSWORD',
                           labelStyle: TextStyle(
@@ -59,6 +87,7 @@ class _FirstPageState extends State<FirstPage> {
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.green))),
                       obscureText: true,
+                      onSaved: (value){password = value;},
                     ),
                     SizedBox(height: 5.0),
                     Container(
@@ -77,15 +106,26 @@ class _FirstPageState extends State<FirstPage> {
                     ),
                     SizedBox(height: 40.0),
                     Container(
-                      height: 40.0,
-                      //onPressed: () {Navigator.pushReplacementNamed(context, '/home');},
+                      height: 40.0,                      
                       child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.greenAccent,
-                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(50.0),
+                        shadowColor: Colors.greenAccent,                        
                         elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: () {Navigator.of(context).pushNamed('/home');},
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                          color: Colors.green,
+                          onPressed: () async {
+                            //username = unCon.text;
+                            //password = pwCon.text;
+                            _savingData();
+                            final url = 'http://10.0.2.15:5000/login';
+                            var data = {'username': username, 'password': password};
+                            final response = await http.post(url, body: json.encode(data));
+                            if(response.statusCode == 200){
+                                Navigator.of(context).pushNamed('/home');} else {
+                                  print('error');
+                                }
+                          },
                           child: Center(
                             child: Text(
                               'LOG IN',
