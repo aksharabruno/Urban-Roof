@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 //import 'package:urban_roof/app/models/cart1.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
-import 'package:urban_roof/app/pages/constants.dart';
-
+//import 'package:urban_roof/app/pages/constants.dart';
+import 'package:urban_roof/app/pages/buy/single_item_view.dart';
 //import '../../size_config.dart';
 
 class CheckoutCard extends StatelessWidget{
@@ -12,6 +12,7 @@ class CheckoutCard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    Added a = new Added(product: null, numOfItem: null);
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 15,//getProportionateScreenWidth(15),
@@ -77,7 +78,7 @@ class CheckoutCard extends StatelessWidget{
                     text: "Total:\n",
                     children: [
                       TextSpan(
-                        text: "Rs ",
+                        text: "Rs ${a.totalvalue()}",
                         style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ],
