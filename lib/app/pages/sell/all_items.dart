@@ -24,8 +24,8 @@ class AllItems extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    buildContainerBottomNav(Icons.ballot, '', context, isSelected: true),
-                    buildContainerBottomNav(Icons.notifications_on_rounded, '', context),
+                    buildContainerBottomNav(Icons.ballot, 'allitems', context, isSelected: true),
+                    buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
                     buildContainerBottomNav(Icons.home, 'home', context),
                     buildContainerBottomNav(Icons.person, 'profile', context),
                     buildContainerBottomNav(Icons.shopping_cart, 'maincategory', context),
