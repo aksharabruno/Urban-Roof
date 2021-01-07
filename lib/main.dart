@@ -14,11 +14,13 @@ import 'package:urban_roof/app/pages/profile/profile_edit.dart';
 import 'package:urban_roof/app/pages/profile/profile_view_page.dart';
 import 'package:urban_roof/app/pages/sell/add_items_to_sell.dart';
 import 'package:urban_roof/app/pages/sell/all_items.dart';
+import 'package:urban_roof/app/pages/todolist.dart';
 
 import 'app/pages/buy/main_category.dart';
 import 'app/pages/buy/seeds_catalog.dart';
 import 'app/pages/cart/confirm_address.dart';
 import 'app/pages/log_in.dart';
+import 'app/pages/notification.dart';
 import 'app/pages/sign_up.dart';
 //import 'app/pages/checkout.dart';
 //import 'app/pages/shop_items.dart';
@@ -60,6 +62,8 @@ class MyApp extends StatelessWidget {
           '/signup': (context) => SignupPage(),
           '/home': (context) => HomePage(),
           '/grow': (context) => MyCrops(),
+          '/notification': (context) => MyNotif(),
+          '/todo' : (context) => Todo(),
           '/maincategory': (context) => MainCategory(),
           '/vegetablecatalog': (context) => VegetableCatalog(),
           '/saplingcatalog': (context) => SaplingCatalog(),
@@ -67,7 +71,7 @@ class MyApp extends StatelessWidget {
           '/catalog': (context) => MyCatalog(),
           '/cart': (context) => CartScreen(),
           '/confirmaddress' : (context) => ConfirmAddress(),
-          '/additems': (context) => AddItems(),
+          '/additems': (context) => AddItemsToSell(),
           '/allitems' : (context) => AllItems(),
           '/profile' : (context) => ProfileViewPage(),
           '/editprofile' : (context) => ProfileEdit(),
