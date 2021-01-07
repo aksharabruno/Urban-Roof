@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Product {
   final int id;
-  final String title, seller, address;
+  final String title, seller, address, qty;
   final List<String> images;
   final List<Color> colors;
   final double rating, price;
@@ -17,7 +17,8 @@ class Product {
     @required this.price,
     @required this.seller,
     @required this.address,
-    @required this.phone
+    @required this.phone,
+    @required this.qty
   });
 }
 
@@ -41,6 +42,7 @@ List<Product> demoProducts = [
     rating: 4.8,
     phone: 9999999999,
     address: 'so n so n so n so address',
+    qty: '1 kg'
   ),
   Product(
     id: 2,
@@ -54,11 +56,12 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Cucumber",
-    price: 50,
+    price: 42,
     seller: seller,
     rating: 4.1,
     phone: 9999999999,
     address: 'so n so n so n so address',
+    qty: '0.5 kg'
   ),
   Product(
     id: 3,
@@ -72,11 +75,12 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Carrot",
-    price: 50,
+    price: 30,
     seller: seller,
     rating: 4.1,
     phone: 9999999999,
     address: 'so n so n so n so address',
+    qty: '1 kg'
   ),
   Product(
     id: 4,
@@ -90,11 +94,12 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Spinach",
-    price: 50,
+    price: 12,
     seller: seller,
     rating: 4.1,
     phone: 9999999999,
     address: 'so n so n so n so address',
+    qty: '0.25 kg'
   ),
   
 ];
