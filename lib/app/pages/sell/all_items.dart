@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:urban_roof/app/common/common_widgets.dart';
+//import 'package:urban_roof/app/models/allitemsmodel.dart';
+import 'package:urban_roof/app/models/cart1.dart';
+//import 'package:urban_roof/app/pages/cart/components/cart_card.dart';
+//import 'package:urban_roof/app/pages/cart/components/body.dart';
 
-class AllItems extends StatelessWidget{
+
+class AllItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    drawer: builddrawerelement(context),
-    bottomNavigationBar: Container(
+      drawer: builddrawerelement(context),
+      appBar: buildAppBar(context),
+      body: Body(),
+      bottomNavigationBar: Container(
               height: 55,
               child: Container(
                 decoration: BoxDecoration(
@@ -32,11 +39,22 @@ class AllItems extends StatelessWidget{
                   ],
                 ),
               )),
-    appBar: AppBar(
-      title: Text('SELL'),
-      centerTitle: true,
+    );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
       backgroundColor: Colors.green,
-      elevation: 2.0,
+      centerTitle: true,
+      title: Column(
+        children: [
+          Text(
+            "YOUR PRODUCE",
+            style: TextStyle(color: Colors.white),
+          ),
+          
+        ],
+      ),
       actions: <Widget>[
         SizedBox(
           width:55.0,
@@ -51,93 +69,105 @@ class AllItems extends StatelessWidget{
         )
           
         ],
-    ),
-    body: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(20.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.teal[900])
-            ),
-            child: Text(
-              'Here are all of your items to sell',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20.0),
-            )
-          ),
-          itemflatbutton('Brinjal', 'saplingbrinjal'),
-          itemflatbutton('Cauliflower', 'saplingcauliflower'),
-          itemflatbutton('Brinjal', 'vegetablebrinjal'),
-          //itemflatbutton('Cabbage', 'saplingecabbage'),
-          itemflatbutton('Tomato', 'saplingtomato'),
-          itemflatbutton('Spinach', 'vegetablespinach'),
-        ],
-      )
       
-    ),
-  );
+    );
   }
 }
 
-BoxDecoration myBoxDecoration(String image){
-  return BoxDecoration(
-    color: Colors.white,
-    image: DecorationImage(
-      image: AssetImage('assets/images/$image.jpg') ,
-      fit: BoxFit.cover,
-    ),
-    borderRadius: BorderRadius.all(
-      Radius.circular(5.0)
-    )
-  );
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
 }
 
-Widget itemflatbutton(String item, String image) {
-  return FlatButton(
-            onPressed: () {},
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              children: [
-                SizedBox(
-                  height: 100.0,
-                  width: 100.0,
-                  child: DecoratedBox(
-                    decoration: myBoxDecoration(image)
-                  ),
-                ),
-                SizedBox(width: 30.0),
-                Column(
-                  children: [
-                    Text(
-                      '$item',
-                      style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(height: 7.0),
-                    Text(
-                      'Rs. 50 per kg',
-                      style: TextStyle(fontSize: 17.0),
-                    ),
+class _BodyState extends State<Body> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+          EdgeInsets.symmetric(horizontal: 20),
+      child: ListView.builder(
+        itemCount: cartList.length,
+        itemBuilder: (context, index) => Padding(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: Dismissible(
+            key: Key(cartList[index].product.id.toString()),
+            direction: DismissDirection.endToStart,
+            onDismissed: (direction) {
+              setState(() {
+                cartList.removeAt(index);
+              });
+            },
+            background: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Color(0xFFFFE6E6),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Row(
+                children: [
+                  Spacer(),
+                  Icon(Icons.delete_outline)
+                ],
+              ),
+            ),
+            child: CartCard(cart: cartList[index]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+class CartCard extends StatelessWidget {
+  const CartCard({
+    Key key,
+    @required this.cart,
+  }) : super(key: key);
 
-                    Row(
-                      children: [
-                        Text(
-                          ' '
-                        )
-                      ],
-                    )
-                  ]
-                ),
-              ],
+  final Cart cart;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 88,
+          child: AspectRatio(
+            aspectRatio: 0.88,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Color(0xFFF5F6F9),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Image.asset(cart.product.images[0]),
             ),
-            shape: RoundedRectangleBorder(side: BorderSide(
-              color: Colors.grey,
-              width: 1.0,
-              style: BorderStyle.solid
+          ),
+        ),
+        SizedBox(width: 20),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              cart.product.title,
+              style: TextStyle(color: Colors.black, fontSize: 16),
+              maxLines: 2,
             ),
-          )
-          );
+            SizedBox(height: 10),
+            Text.rich(
+              TextSpan(
+                text: "Rs ${cart.product.price}",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600, color: Colors.black),
+                children: [
+                  TextSpan(
+                      text: " for ${cart.product.qty}",
+                      style: Theme.of(context).textTheme.bodyText1),
+                ],
+              ),
+            )
+          ],
+        )
+      ],
+    );
+  }
 }
