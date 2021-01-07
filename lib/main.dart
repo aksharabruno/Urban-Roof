@@ -5,8 +5,6 @@ import 'package:urban_roof/app/models/catalog.dart';
 import 'package:urban_roof/app/pages/buy/sapling_catalog.dart';
 import 'package:urban_roof/app/pages/buy/single_item_view.dart';
 import 'package:urban_roof/app/pages/buy/vegetable_catalog.dart';
-import 'package:urban_roof/app/pages/buy/vegetablecatalog.dart';
-//import 'package:urban_roof/app/pages/cart.dart';
 import 'package:urban_roof/app/pages/cart/cart_screen.dart';
 import 'package:urban_roof/app/pages/grow.dart';
 import 'package:urban_roof/app/pages/home.dart';
@@ -18,7 +16,7 @@ import 'package:urban_roof/app/pages/todolist.dart';
 
 import 'app/pages/buy/main_category.dart';
 import 'app/pages/buy/seeds_catalog.dart';
-import 'app/pages/cart/confirm_address.dart';
+import 'app/pages/cart/confirm_order.dart';
 import 'app/pages/log_in.dart';
 import 'app/pages/notification.dart';
 import 'app/pages/sign_up.dart';
@@ -68,9 +66,8 @@ class MyApp extends StatelessWidget {
           '/vegetablecatalog': (context) => VegetableCatalog(),
           '/saplingcatalog': (context) => SaplingCatalog(),
           '/seedcatalog': (context) => SeedCatalog(),
-          '/catalog': (context) => MyCatalog(),
           '/cart': (context) => CartScreen(),
-          '/confirmaddress' : (context) => ConfirmAddress(),
+          '/confirmaddress' : (context) => ConfirmOrder(),
           '/additems': (context) => AddItemsToSell(),
           '/allitems' : (context) => AllItems(),
           '/profile' : (context) => ProfileViewPage(),
