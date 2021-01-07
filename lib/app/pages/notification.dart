@@ -46,12 +46,7 @@ class MyNotif extends StatelessWidget {
             );
           }),
           title: Text(
-            "Urban Roof",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
+            "NOTIFICATIONS",
           ),
           actions: <Widget>[
             IconButton(
@@ -61,6 +56,8 @@ class MyNotif extends StatelessWidget {
           ],
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: 8,
@@ -72,12 +69,12 @@ class MyNotif extends StatelessWidget {
                   width: 10,
                 ),
                 Padding(padding: new EdgeInsets.all(2)),
-                Text("Notifications",
+                /*Text("Notifications",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.5,
-                    )),
+                    )),*/
               ],
             ),
             SizedBox(
@@ -85,12 +82,13 @@ class MyNotif extends StatelessWidget {
             ),
             Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(135.0),
+                Container(
+                  padding: const EdgeInsets.all(115.0),
+                  alignment: Alignment.center,
                   child: Text("No new notifications",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 20,
                         letterSpacing: 0.5,
                       )),
                 ),
