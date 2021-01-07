@@ -74,7 +74,7 @@ class _AddItemsToSell extends State<AddItemsToSell> {
               padding: const EdgeInsets.all(10.0),
               decoration: myBoxDecoration(),
               child: Text(
-                "Always hoping to promote small businesses like yours! Because every one deserves the equal chance :)",
+                "Always hoping to promote small businesses like yours! :)",
                 style: TextStyle(fontSize: 20.0, color: Colors.green[800]),
               ),
             ),
@@ -169,6 +169,30 @@ class _AddItemsToSell extends State<AddItemsToSell> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Enter the price',
+                      ),
+                    ),
+                  ),
+                ]
+              )
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 20.0),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    'DESCRIPTION  : ',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),
+                  ),
+                  SizedBox(width: 13.0),
+                  Expanded(
+                    child: TextField(
+                      textDirection: TextDirection.ltr,
+                      textAlign: TextAlign.center,
+                      controller: priceCon,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Enter small description (optional)',
                       ),
                     ),
                   ),
