@@ -11,36 +11,27 @@ class _SignupPageState extends State<SignupPage> {
   String name = '', username = '', password = '';
   String address = '', mob = '';
   int age;
+
+  final nameCon = new TextEditingController();
+  final addCon = new TextEditingController();
+  final mobCon = new TextEditingController();
+  final ageCon = new TextEditingController();
+  final unCon = new TextEditingController();
+  final pwCon = new TextEditingController();
+
   //String final_response ='';
-  final _formkey1 = GlobalKey<FormState>();
-  final _formkey2 = GlobalKey<FormState>();
-  final _formkey3 = GlobalKey<FormState>();
-  final _formkey4 = GlobalKey<FormState>();
-  final _formkey5 = GlobalKey<FormState>();
-  final _formkey6 = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
+  
   
   Future<void> _savingData() async {
-    final validation1 = _formkey1.currentState.validate();
-    final validation2 = _formkey2.currentState.validate();
-    final validation3 = _formkey3.currentState.validate();
-    final validation4 = _formkey3.currentState.validate();
-    final validation5 = _formkey3.currentState.validate();
-    final validation6 = _formkey3.currentState.validate();
+    final validation = _formkey.currentState.validate();
 
-    if(!validation1 && !validation2 && !validation3 && !validation4 && !validation5 && !validation6){
+    if(!validation){
       return;
     }
-    _formkey1.currentState.save();
-    _formkey2.currentState.save();
-    _formkey3.currentState.save();
-    _formkey4.currentState.save();
-    _formkey5.currentState.save();
-    _formkey6.currentState.save();
+    _formkey.currentState.save();
   }
 
-  //final unCon = new TextEditingController();
-  //final pwCon = new TextEditingController();
-  //final nameCon = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -77,10 +68,12 @@ class _SignupPageState extends State<SignupPage> {
             child: Builder(
               builder: (context) => Form(
               child: Column(
+                key: _formkey,
                 children: <Widget>[
                   TextFormField(
-                    key: _formkey1,
-                    //controller: nameCon,
+                    
+                    controller: nameCon,
+                    autofocus: true,
                     decoration: InputDecoration(
                         labelText: 'NAME ',
                         labelStyle: TextStyle(
@@ -88,14 +81,16 @@ class _SignupPageState extends State<SignupPage> {
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
-                    onSaved: (value){
+                        
+                    /*onSaved: (value){
                       name = value;
-                    }
+                    }*/
                   ),
                   SizedBox(height: 10.0),
                   TextFormField(
-                    key: _formkey2,
-                    //controller: nameCon,
+                    
+                    controller: addCon,
+                    autofocus: true,
                     decoration: InputDecoration(
                         labelText: 'ADDRESS ',
                         labelStyle: TextStyle(
@@ -103,14 +98,15 @@ class _SignupPageState extends State<SignupPage> {
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
-                    onSaved: (value){
+                    /*onSaved: (value){
                       name = value;
-                    }
+                    }*/
                   ),
                   SizedBox(height: 10.0),
                   TextFormField(
-                    key: _formkey3,
-                    //controller: nameCon,
+                   
+                    controller: mobCon,
+                    autofocus: true,
                     decoration: InputDecoration(
                         labelText: 'MOBILE ',
                         labelStyle: TextStyle(
@@ -118,14 +114,15 @@ class _SignupPageState extends State<SignupPage> {
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
-                    onSaved: (value){
+                    /*onSaved: (value){
                       name = value;
-                    }
+                    }*/
                   ),
                   SizedBox(height: 10.0),
                   TextFormField(
-                    key: _formkey4,
-                    //controller: nameCon,
+                    
+                    controller: ageCon,
+                    autofocus: true,
                     decoration: InputDecoration(
                         labelText: 'AGE ',
                         labelStyle: TextStyle(
@@ -133,15 +130,16 @@ class _SignupPageState extends State<SignupPage> {
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
-                    onSaved: (value){
+                   /* onSaved: (value){
                       name = value;
-                    }
+                    }*/
                   ),
                   SizedBox(height: 10.0),
 
                   TextFormField(
-                    key: _formkey5,
-                    //controller: unCon,
+                    
+                    controller: unCon,
+                    autofocus: true,
                     decoration: InputDecoration(
                         labelText: 'USERNAME',
                         labelStyle: TextStyle(
@@ -150,14 +148,15 @@ class _SignupPageState extends State<SignupPage> {
                             color: Colors.grey),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
-                    onSaved: (value){
+                   /* onSaved: (value){
                       name = value;
-                    }
+                    }*/
                   ),
                   SizedBox(height: 10.0),
                   TextFormField(
-                    key: _formkey6,
-                    //controller: pwCon,
+                   
+                    controller: pwCon,
+                    autofocus: true,
                     decoration: InputDecoration(
                         labelText: 'PASSWORD ',
                         labelStyle: TextStyle(
@@ -167,9 +166,9 @@ class _SignupPageState extends State<SignupPage> {
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green))),
                     obscureText: true,
-                    onSaved: (value){
+                    /*onSaved: (value){
                       name = value;
-                    }
+                    }*/
                   ),
                   SizedBox(height: 50.0),
                   Container(
@@ -185,13 +184,21 @@ class _SignupPageState extends State<SignupPage> {
                           color: Colors.green,
                           onPressed: () async {
                             //Navigator.of(context).pushNamed('/home');
-                            //name = nameCon.text;
-                            //username = unCon.text;
-                            //password = pwCon.text;
+                            setState(() {
+                              name = nameCon.text;
+                              address = addCon.text;
+                              mob = mobCon.text;
+                              age = int.parse(ageCon.text);
+                              username = unCon.text; 
+                              password = pwCon.text;
+                            });
+                            
                             _savingData();
-                            final url = 'http://10.0.2.15:5000/signup';
+                            final url = 'http://10.0.2.2:5000/signup';
                             var data = {'Name': name, 'Address': address, 'Mobile Number': mob, 'Age': age, 'Username': username, 'Password': password};
                             final response = await http.post(url, body: json.encode(data));
+                            print(response);
+                            Navigator.of(context).pushNamed('/home');
                             if(response.statusCode == 200){
                               Navigator.of(context).pushNamed('/home');
                             } else {
