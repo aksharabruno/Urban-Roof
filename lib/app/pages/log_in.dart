@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+//import 'package:urban_roof/app/pages/home.dart';
+
 class FirstPage extends StatefulWidget {
   @override
   _FirstPageState createState() => new _FirstPageState();
@@ -11,20 +13,17 @@ class _FirstPageState extends State<FirstPage> {
   String username = "";
   String password = "";
   //String final_response = "";
-  final _formkey1 = GlobalKey<FormState>();
-  final _formkey2 = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
 
-  //final unCon = new TextEditingController();
-  //final pwCon = new TextEditingController();
+  final unCon = new TextEditingController();
+  final pwCon = new TextEditingController();
 
   Future<void> _savingData() async {
-    final validation1 = _formkey1.currentState.validate();
-    final validation2 = _formkey2.currentState.validate();
-    if(!validation1 && !validation2){
+    final validation = _formkey.currentState.validate();
+    if(!validation){
       return;
     }
-    _formkey1.currentState.save();
-    _formkey2.currentState.save();
+    _formkey.currentState.save();
   }
   @override
   Widget build(BuildContext context) {
@@ -59,10 +58,9 @@ class _FirstPageState extends State<FirstPage> {
             Container(
                 padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                 child: Column(
-                  
+                  key: _formkey,
                   children: <Widget>[
-                    TextFormField(
-                      key: _formkey1,
+                    TextField(
                      // controller: unCon,
                       decoration: InputDecoration(
                           labelText: 'USERNAME',
@@ -72,11 +70,10 @@ class _FirstPageState extends State<FirstPage> {
                               color: Colors.grey),
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.green))),
-                      onSaved: (value){username = value;},
+                      //onSaved: (value){username = value;},
                     ),
                     SizedBox(height: 20.0),
-                    TextFormField(
-                      key: _formkey2,
+                    TextField(
                       //controller: pwCon,
                       decoration: InputDecoration(
                           labelText: 'PASSWORD',
@@ -87,7 +84,7 @@ class _FirstPageState extends State<FirstPage> {
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.green))),
                       obscureText: true,
-                      onSaved: (value){password = value;},
+                      //onSaved: (value){password = value;},
                     ),
                     SizedBox(height: 5.0),
                     Container(
@@ -115,16 +112,22 @@ class _FirstPageState extends State<FirstPage> {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                           color: Colors.green,
                           onPressed: () async {
-                            //username = unCon.text;
-                            //password = pwCon.text;
-                            _savingData();
+                            //Navigator.of(context).pushNamed('/home');
+                            setState(() {
+                              username = unCon.text;
+                              password = pwCon.text;
+                            });
+                            
+                            /*_savingData();
                             final url = 'http://10.0.2.15:5000/login';
                             var data = {'username': username, 'password': password};
-                            final response = await http.post(url, body: json.encode(data));
-                            if(response.statusCode == 200){
+                            final response = await http.post(url, body: json.encode(data));*/
+                            Navigator.of(context).pushNamed('/home');
+                            //Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(uname: username)));
+                            /*if(response.statusCode == 200){
                                 Navigator.of(context).pushNamed('/home');} else {
                                   print('error');
-                                }
+                                }*/
                           },
                           child: Center(
                             child: Text(
