@@ -26,7 +26,7 @@ class CartScreen extends StatelessWidget {
       title: Column(
         children: [
           Text(
-            "YOUR  CART",
+            "YOUR CART",
             style: TextStyle(color: Colors.white),
           ),
           
