@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+//import 'package:urban_roof/app/pages/home.dart';
 Widget builddrawerelement(BuildContext context){
     return Drawer(
       child: ListView(
@@ -24,12 +24,22 @@ Widget builddrawerelement(BuildContext context){
                   },
                   alignment: Alignment(-1.0, 0),
                 ),
-                SizedBox(height: 40.0),
-                Text(
-                  'Mike Johnson                                        >',
-                  style: TextStyle(color: Colors.white, fontSize: 18.0),
-                  textAlign: TextAlign.left,
-                ),
+                SizedBox(height: 20.0),
+                Row(
+                  children: [
+                    Text(
+                      'name',
+                      //'$name',
+                      style: TextStyle(color: Colors.white, fontSize: 18.0),
+                      textAlign: TextAlign.left,
+                    ),
+                    SizedBox(width:175.0),
+                    IconButton(
+                      icon: Icon(Icons.arrow_forward_sharp, color: Colors.white), 
+                      onPressed: () {Navigator.pushReplacementNamed(context, '/profile');})
+                  ]
+                )
+                
               ],
             ),
             decoration: BoxDecoration(color: Colors.green[600])
@@ -39,6 +49,13 @@ Widget builddrawerelement(BuildContext context){
             title: Text('GROW', style: TextStyle(fontSize: 17.0)),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/grow');
+            },
+          ),
+          ListTile(
+            contentPadding: const EdgeInsets.only(left: 20.0),
+            title: Text('TO DO LIST', style: TextStyle(fontSize: 17.0)),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/todo');
             },
           ),
           ListTile(
@@ -55,37 +72,6 @@ Widget builddrawerelement(BuildContext context){
               Navigator.pushReplacementNamed(context, '/');
             },
           ),
-          /*ListTile(
-            contentPadding: const EdgeInsets.only(left: 20.0),
-            title: Text('HOME', style: TextStyle(fontSize: 17.0)),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/home');
-            },
-          ),
-          ListTile(
-            contentPadding: const EdgeInsets.only(left: 20.0),
-            title: Text('GROW', style: TextStyle(fontSize: 17.0)),
-            onTap: () {},
-          ),
-          ListTile(
-            contentPadding: const EdgeInsets.only(left: 20.0),
-            title: Text('BUY', style: TextStyle(fontSize: 17.0)),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/maincategory');
-            },
-          ),
-          ListTile(
-            contentPadding: const EdgeInsets.only(left: 20.0),
-            title: Text('SELL', style: TextStyle(fontSize: 17.0)),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/additemstosell');
-            },
-          ),
-          ListTile(
-            contentPadding: const EdgeInsets.only(left: 20.0),
-            title: Text('NOTIFICATION', style: TextStyle(fontSize: 17.0)),
-            onTap: () {},
-          ),*/
         ]
       )
     );
@@ -113,8 +99,6 @@ Widget buildContainerBottomNav(IconData icon, String route, BuildContext context
           color: isSelected ? Colors.green[800] : Colors.white, size: 30,
           ), onPressed: () {Navigator.pushReplacementNamed(context, '/$route');}
         ),
-            
-          
         );
 
 }
