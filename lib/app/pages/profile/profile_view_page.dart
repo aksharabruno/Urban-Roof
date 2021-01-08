@@ -196,7 +196,7 @@ class ProfileContent extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Container(
         padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color(0xFFF5F6F9)),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.grey[200]),
         //shape: RoundedRectangleBorder(borderRadius: ),
         //color: Color(0xFFF5F6F9),
         //onPressed: press,
