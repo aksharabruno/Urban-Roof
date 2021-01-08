@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urban_roof/app/common/common_widgets.dart';
+import 'package:urban_roof/app/common/constants.dart';
 //import 'package:urban_roof/app/pages/profile/profile_edit.dart';
 
 
@@ -29,9 +30,9 @@ class ProfileViewPage extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     buildContainerBottomNav(Icons.ballot, 'allitems', context),
-                    buildContainerBottomNav(Icons.notifications_on_rounded, '', context),
+                    buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
                     buildContainerBottomNav(Icons.home, 'home', context),
-                    buildContainerBottomNav(Icons.person, '', context, isSelected: true),
+                    buildContainerBottomNav(Icons.person, 'profile', context, isSelected: true),
                     buildContainerBottomNav(Icons.shopping_cart, 'maincategory', context),
                   ],
                 ),
@@ -64,13 +65,12 @@ class ProfileViewPage extends StatelessWidget{
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children : [
-                          SizedBox(height: 130.0,),
+                          SizedBox(height: 80.0,),
                           CircleAvatar(
                             radius: 73.0,
                             backgroundColor: Colors.green[100],
                             child: Text(
-                              'MI',
-                      //'${profile.name.substring(0,2).toUpperCase()}',
+                              '${name.substring(0,2).toUpperCase()}',
                           style: TextStyle(
                             fontSize: 70.0,
                             color: Colors.green,
@@ -82,37 +82,15 @@ class ProfileViewPage extends StatelessWidget{
                       SizedBox(height: 30.0),
                       Text(
                         //'${profile.name}',
-                        'Mike Johnson',
+                        '$username',
                         style: TextStyle(
                           fontSize: 22.0,
                           color: Colors.green[800],
                         ),
                       ),
                       SizedBox(height: 10.0,),
-                      /*Card(
-                        margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-                        clipBehavior: Clip.antiAlias,
-                        color: Colors.white,
-                        elevation: 5.0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Bio',
-                                    //  'Bio\n${profile.desc}'
-                                    )
-                                  ],
-                                ),
-                              )
-                            ]
-                          ),
-                        ),
-                      ),*/
-                      SizedBox(height:30.0),
+                      
+                      SizedBox(height:5.0),
                       Container(
                         width: 400.0,
                         decoration: BoxDecoration(
@@ -120,7 +98,7 @@ class ProfileViewPage extends StatelessWidget{
                         ),
                         child: Column(
                           children: [
-                            SizedBox(height:30.0),
+                            SizedBox(height:15.0),
                             Text(
                               'Contact Details',
                               //'Contact Details',
@@ -131,8 +109,12 @@ class ProfileViewPage extends StatelessWidget{
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(height: 10.0),
-                            Text(
-                              'Mob/Phone: +91 8888888888',
+                            ProfileContent(criteria: 'Name',text: '$name'),
+                            ProfileContent(criteria:'Age',text: '$age'),
+                            ProfileContent(criteria:'Address',text: '$address'),
+                            ProfileContent(criteria:'Mob/Phone', text: '$mob',),
+                            /*Text(
+                              'Name: $name',
                               //'Mob/Phone: ${profile.number}',
                               style: TextStyle(
                                 color: Colors.green[800],
@@ -142,7 +124,7 @@ class ProfileViewPage extends StatelessWidget{
                             ),
                             SizedBox(height: 5.0),
                             Text(
-                              'Email: sample@sample.com',
+                              'Address: $address',
                               //'Email ID: ${profile.eid}',
                               style: TextStyle(
                                 color: Colors.green[800],
@@ -152,15 +134,17 @@ class ProfileViewPage extends StatelessWidget{
                             ),
                             SizedBox(height: 5.0),
                             Text(
-                              'Address: Sample address',
-                              //'Address: ${profile.address}',
+                              'Mob/Phone: $mob',
+                              //'Mob/Phone: ${profile.number}',
                               style: TextStyle(
                                 color: Colors.green[800],
                                 fontSize: 17.0,
                               ),
                               textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height: 200.0),
+                            ),*/
+                            SizedBox(height: 15.0),
+                            
+                            
                             RaisedButton(
                               padding: const EdgeInsets.all(10.0),
                               shape: RoundedRectangleBorder(
@@ -193,5 +177,38 @@ class ProfileViewPage extends StatelessWidget{
           ),
         )
       );
+  }
+}
+
+class ProfileContent extends StatelessWidget {
+  const ProfileContent({
+    Key key,
+    @required this.criteria,
+    this.text,
+  }) : super(key: key);
+
+  final String criteria;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color(0xFFF5F6F9)),
+        //shape: RoundedRectangleBorder(borderRadius: ),
+        //color: Color(0xFFF5F6F9),
+        //onPressed: press,
+        child: Row(
+          children: [
+            Text('$criteria : ', style:TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+            SizedBox(width: 20),
+            Expanded(child: Text(text, style:TextStyle(fontSize: 18.0))),
+            //Icon(Icons.arrow_forward_ios),
+          ],
+        ),
+      ),
+    );
   }
 }
