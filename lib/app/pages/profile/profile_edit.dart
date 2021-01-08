@@ -1,34 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urban_roof/app/common/common_widgets.dart';
+import 'package:urban_roof/app/common/constants.dart';
 //import 'package:urban_roof/app/pages/profile/profile_view_page.dart';
 
 
 // ignore: must_be_immutable
 class ProfileEdit extends StatefulWidget{
-  var name;
-  var eid;
-  var number;
-  var address;
-  var desc;
+  
   @override
-  _ProfileEdit createState() => _ProfileEdit(name, eid, number, address, desc);
+  _ProfileEdit createState() => _ProfileEdit();
 }
 
 class _ProfileEdit extends State<ProfileEdit>{
-  var name;
-  var eid;
-  var number;
-  var address;
-  var desc;
+
 
   final nameCon = new TextEditingController();
-  final eidCon = new TextEditingController();
   final numCon = new TextEditingController();
   final addCon = new TextEditingController();
-  final descCon = new TextEditingController();
 
-  _ProfileEdit(this.name, this.eid, this.number, this.address, this.desc);
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -52,7 +42,7 @@ class _ProfileEdit extends State<ProfileEdit>{
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     buildContainerBottomNav(Icons.ballot, 'allitems', context),
-                    buildContainerBottomNav(Icons.notifications_on_rounded, '', context),
+                    buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
                     buildContainerBottomNav(Icons.home, 'home', context),
                     buildContainerBottomNav(Icons.person, 'profile', context, isSelected: true),
                     buildContainerBottomNav(Icons.shopping_cart, 'maincategory', context),
@@ -85,19 +75,14 @@ class _ProfileEdit extends State<ProfileEdit>{
               Container(
                 alignment: Alignment.topLeft,
                 child: CircleAvatar(
-                  radius: 73.0,
-                  
-                  backgroundColor: Colors.green[100],
-                  child: Text(
-                          'MI',
+                            radius: 73.0,
+                            backgroundColor: Colors.green[100],
+                            child: Text(
+                              '${name.substring(0,2).toUpperCase()}',
                           style: TextStyle(
                             fontSize: 70.0,
-                            color: Colors.green,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                ),
-              ),
+                            color: Colors.green,)),
+              ),),
               SizedBox(height:70.0),
               Text(
                 'Mob/Phone',
@@ -112,7 +97,7 @@ class _ProfileEdit extends State<ProfileEdit>{
                 controller: numCon,
                 cursorColor: Colors.white10,
                 decoration: InputDecoration(
-                  hintText: 'Your contact number',
+                  hintText: '$mob',
                 ),
               ),
               SizedBox(height: 15.0,),
@@ -129,7 +114,7 @@ class _ProfileEdit extends State<ProfileEdit>{
                 controller: addCon,
                 cursorColor: Colors.white10,
                 decoration: InputDecoration(
-                  hintText: 'Your address',
+                  hintText: '$address',
                 ),
               ),
               SizedBox(height: 70.0),
@@ -155,9 +140,7 @@ class _ProfileEdit extends State<ProfileEdit>{
                 onPressed: () {
                   setState((){
                   name = nameCon.text;
-                  desc = descCon.text;
-                  eid = eidCon.text;
-                  number = numCon.text;
+                  mob = numCon.text;
                   address = addCon.text;
                   //Navigator.push(context, new MaterialPageRoute(builder: (context) => ProfileViewPage(profile: new ProfileEdit(name, eid, number, address, desc))));
                 });
