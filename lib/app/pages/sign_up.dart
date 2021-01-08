@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:urban_roof/app/common/constants.dart';
+
 class SignupPage extends StatefulWidget {
   @override
   _SignupPageState createState() => _SignupPageState();
@@ -195,22 +197,24 @@ class _SignupPageState extends State<SignupPage> {
                               
                             });
                             print('hi');
-                            /*_savingData();
+                            _savingData();
+                            //Person P = new Person(name:name, address:address, mob:mob, age:age, username:username);
+                            saveinfo(name,address,mob,age,username);
                             //final url = 'http://10.0.2.2:5000/signup';
                             //var data = {'Name': name, 'Address': address, 'Mobile Number': mob, 'Age': age, 'Username': username, 'Password': password};
                             //print(data);
-                            var response = await http.post('http://127.0.0.1:5000/signup', headers: {"content-type": "application/json"},
+                            /*var response = await http.post('http://192.168.0.1:5000/signup', headers: {"content-type": "application/json"},
                             body: json.encode({"Name": name, "Address": address, "Mobile Number": mob, "Age": age, "Username": username, "Password": password}));
                             //final response = await http.post(url, body: json.encode({'Name': 'adi'}));
                             print('hey');
-                            print(response);*/
+                            print(response);
                             Navigator.of(context).pushNamed('/home');
-                            /*if(response.statusCode == 200){
+                            if(response.statusCode == 200){
                               Navigator.of(context).pushNamed('/home');
                             } else {
                               print('error');
-                            }
-                            Navigator.pushReplacementNamed(context,'/home');*/
+                            }*/
+                            Navigator.pushReplacementNamed(context,'/home');
                             //http.close();
                           },
                           
