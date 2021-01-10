@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-//import 'package:urban_roof/app/bloc/cart_items_block.dart';
 import 'package:urban_roof/app/common/common_widgets.dart';
 import 'package:urban_roof/app/models/allitemsmodel.dart';
 import 'package:urban_roof/app/pages/buy/single_item_view.dart';
 
-List<Item> saplings = allItems.where((i) => i.type == 'sapling').toList();
+List<Item> seeds = allItems.where((i) => i.type == 'seed').toList();
 
-class SaplingCatalog extends StatelessWidget{
+class SeedCatalog extends StatelessWidget{
   
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class SaplingCatalog extends StatelessWidget{
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pushReplacementNamed(context, '/maincategory')
         ), 
-        title: Text('BUY SAPLING'),
+        title: Text('BUY SEEDS'),
         centerTitle: true,
         backgroundColor: Colors.green,
         elevation: 2.0,
@@ -80,7 +79,7 @@ class CatalogList extends StatelessWidget{
     //final double itemWidth = size.width / 2;
 
     return GridView.builder(
-      itemCount: saplings.length,
+      itemCount: seeds.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 20,
@@ -89,7 +88,7 @@ class CatalogList extends StatelessWidget{
       ),
       itemBuilder: (context, index) => Padding(
         padding: EdgeInsets.all(10),
-        child: ItemCard(item: saplings[index]),
+        child: ItemCard(item: seeds[index]),
       )
     
   
@@ -137,7 +136,8 @@ class ItemCard extends StatelessWidget {
                 children: [
                   Image.asset("${item.images}", fit: BoxFit.cover),
                   Expanded(child: Container(
-                    height: MediaQuery.of(context).size.height/3, 
+                    padding: EdgeInsets.all(4.0),
+                    height: MediaQuery.of(context).size.height/2.5, 
                     width: MediaQuery.of(context).size.width/2.5,
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
@@ -147,11 +147,13 @@ class ItemCard extends StatelessWidget {
                       )
                     ),
                     child: Column(
+                      
                       children: [
                         SizedBox(height:10.0),
+                        
                         Text(
                         '${item.title.toUpperCase()}\nRs.${item.price} for ${item.qty}',
-                        style: TextStyle(fontSize: 20.0, )
+                        style: TextStyle(fontSize: 15.0, )
                         ),
                       ]
                       ))
