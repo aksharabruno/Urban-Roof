@@ -22,16 +22,29 @@ def index():
     return "Hello world !"
 
 @app.route('/login',methods=['POST'])
+
 def login():
     data = request.json
     print(data)
     cur = get_db().cursor()
-    c = cur.execute("SELECT username from login where username = (?) and password = (?)", [data['username'],data['password']])
-    userrow = c.fetchone()
-    if userrow == None :
-        return 'No match'
-    username = userrow[0] # or whatever the index position is
-    return username,UserId 
+    c = cur.execute("SELECT * from login where username = (?) and password = (?)", [data['username'],data['password']])
+    profile = c.fetchall()
+    
+    if profile == None :
+        return "profile not found"
+    list_profile = []
+    for i in profile:
+     
+      Name = i[3]
+      Address = i[4]
+      Mobile_no = i[5]
+      UserId = i[0]
+      Age = i[6]
+      username = i[1]
+      #writeTofile(photo, "/home/hp/project/app.jpg")
+      list_profile.append({"Name":Name,"Address":Address,"Mobile_no":Mobile_no,"UserId":UserId,"Age":Age,"username":username})
+    
+    return jsonify(list_profile)
     
 @app.route('/signup',methods=['POST'])
 def signup():
@@ -192,6 +205,38 @@ def update(Address,Mobile_no,UserId):
     sql = """UPDATE login SET Address = (?), Mobile_no = (?) WHERE UserId = (?)"""
     
     data_tuple=(Address,Mobile_no,UserId)
+    
+    cur.execute(sql,data_tuple)
+
+    
+    get_db().commit()
+    cur.close()
+           
+    return("updated successfully")
+
+@app.route('/cart_dec',methods=['POST'])
+def cart_dec():
+    data= request.json
+    print(len(data))
+    for i in range(len(data)) :
+        print(data[i])
+        Quantity = data[i]['Quantity']
+        print(Quantity)
+        Category = data[i]['Category'] 
+        UserId = data[i]['UserId'] 
+        ProName = data[i]['ProName'] 
+        update_cart(Quantity,ProName,Category,UserId)
+    return("updated successfully")
+   
+
+
+def update_cart(Quantity,ProName,Category,UserId):
+
+    cur = get_db().cursor()
+
+    sql = """UPDATE sell_product SET Quantity = Quantity-(?) WHERE UserId = (?) and ProName = (?) and Category = (?)"""
+    
+    data_tuple=(Quantity,UserId,ProName,Category)
     
     cur.execute(sql,data_tuple)
 
