@@ -42,7 +42,7 @@ class _ProfileEdit extends State<ProfileEdit>{
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     buildContainerBottomNav(Icons.ballot, 'allitems', context),
-                    buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
+                   // buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
                     buildContainerBottomNav(Icons.home, 'home', context),
                     buildContainerBottomNav(Icons.person, 'profile', context, isSelected: true),
                     buildContainerBottomNav(Icons.shopping_cart, 'maincategory', context),
