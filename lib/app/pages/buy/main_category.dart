@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urban_roof/app/common/common_widgets.dart';
+import 'package:urban_roof/app/pages/buy/seeds_catalog.dart';
 
 class MainCategory extends StatelessWidget {
 
@@ -26,7 +27,7 @@ class MainCategory extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               buildContainerBottomNav(Icons.ballot, 'allitems', context),
-                              buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
+                             // buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
                               buildContainerBottomNav(Icons.home, 'home', context),
                               buildContainerBottomNav(Icons.person, 'profile', context),
                               buildContainerBottomNav(Icons.shopping_cart, 'maincategory', context, isSelected: true),
@@ -51,6 +52,7 @@ class MainCategory extends StatelessWidget {
                   
                 ),
                 body: Container(
+                  alignment: Alignment.center,
                   padding: const EdgeInsets.all(1.0),
                   child: Center(
                     child: Column(
@@ -64,14 +66,18 @@ class MainCategory extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        SizedBox(height: 50.0),
-                        Row(
+                        SizedBox(height: 20.0,),
+                        Container(
+                          
+                          padding: EdgeInsets.all(30.0),
+                          child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             buildRowWithColumn('vegetables','Vegetables',context),
                             buildRowWithColumn('saplings','Saplings',context),
                             buildRowWithColumn('seeds','Seeds',context),
                           ],
-                        )
+                        ))
                       ],
                     ),
                   ),
@@ -100,7 +106,7 @@ GestureDetector buildRowWithColumn(String image, String title, BuildContext cont
           children: [
             Container(
               height: 150,
-              width: 120,
+              width: MediaQuery.of(context).size.width/4.5,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: (Image.asset(
