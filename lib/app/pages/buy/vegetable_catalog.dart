@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 //import 'package:urban_roof/app/bloc/cart_items_block.dart';
 import 'package:urban_roof/app/common/common_widgets.dart';
+import 'package:urban_roof/app/models/allitemsmodel.dart';
 import 'package:urban_roof/app/pages/buy/single_item_view.dart';
+
+List<Item> vegetables = allItems.where((i) => i.type == 'vegetable').toList();
 
 class VegetableCatalog extends StatelessWidget{
   
@@ -28,7 +31,7 @@ class VegetableCatalog extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     buildContainerBottomNav(Icons.ballot, 'allitems', context),
-                    buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
+                    //buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
                     buildContainerBottomNav(Icons.home, 'home', context),
                     buildContainerBottomNav(Icons.person, 'profile', context),
                     buildContainerBottomNav(Icons.shopping_cart, 'maincategory', context, isSelected: true),
@@ -56,8 +59,12 @@ class VegetableCatalog extends StatelessWidget{
         ],
       ),
       extendBodyBehindAppBar: false,
-      body: 
-        CatalogList(),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: CatalogList(),
+      )
+        
      
     );
   }
@@ -68,55 +75,55 @@ class CatalogList extends StatelessWidget{
   const CatalogList({Key key, }) : super(key: key);
 
   Widget build(BuildContext context){
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 150) / 2;
-    final double itemWidth = size.width / 2;
+    
+    //final double itemHeight = (size.height - kToolbarHeight - 150) / 2;
+    //final double itemWidth = size.width / 2;
 
-    return CustomScrollView(
-          primary: false,
-          slivers: <Widget>[
-            SliverPadding(
-              padding: const EdgeInsets.all(10),
-              sliver: SliverGrid.count(
-                childAspectRatio: (itemWidth / itemHeight),
-                crossAxisSpacing: 0,
-                mainAxisSpacing: 1,
-                crossAxisCount: 2,
-                children: <Widget>[
-                  
-                  //buildProductView('spinach','Spinach',context,itemHeight,itemWidth,1,50,'Sample Stores'),
-                  buildProductView('vegetable','radish','Radish',context,itemHeight,itemWidth,1,50,'Sample Stores', '28/3, north street, mtm', ''),
-                  buildProductView('vegetable','cucumber','Cucumber',context,itemHeight,itemWidth,1,50,'Sample Stores','28/3, north street, mtm', ''),
-                  buildProductView('vegetable','brinjal','Brinjal',context,itemHeight,itemWidth,1,50,'Sample Stores','28/3, north street, mtm', ''),
-                  buildProductView('vegetable','coriander','Coriander',context,itemHeight,itemWidth,1,50,'Sample Stores','28/3, north street, mtm', ''),
-                  //buildProductView('cabbage','Cabbage',context,itemHeight,itemWidth,1,50,'Sample Stores'),
-                  buildProductView('vegetable','carrot','Carrot',context,itemHeight,itemWidth,1,50,'Sample Stores','28/3, north street, mtm', ''),
-                  buildProductView('vegetable','tomato','Tomato',context,itemHeight,itemWidth,1,50,'Sample Stores', '28/3, north street, mtm', ''),
-                  //buildProductView('3','Vege',context,itemHeight,itemWidth),                  
-                  
-                ],
-              ),
-            ),
-          ],
-        );
+    return GridView.builder(
+      itemCount: vegetables.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 20,
+        childAspectRatio: 0.75,
+      ),
+      itemBuilder: (context, index) => Padding(
+        padding: EdgeInsets.all(10),
+        child: ItemCard(item: vegetables[index]),
+      )
+    
+  
+                 
+    );
+          
+      
   }
 }
 
-GestureDetector buildProductView(String type, String image, String title, BuildContext context, double height, double width, double qty, double price, String seller, String address, String desc){
-  return GestureDetector(
-    onTap: (){
-      Navigator.of(context).push(
+class ItemCard extends StatelessWidget {
+  const ItemCard({
+    Key key,
+    @required this.item,
+  }) : super(key: key);
+  final Item item;
+
+  @override
+  Widget build(BuildContext context) {
+
+      return GestureDetector(
+      onTap: (){
+        Navigator.of(context).push(
         MaterialPageRoute(builder: (context) {
-          return SingleItemView(type:type, image:image, title:title, context:context, qty:qty, price:price, seller:seller, address: address, desc: desc);
+          return SingleItemView(type:item.type, image:item.images, title:item.title, context:context, qty:item.qty, price:item.price, seller:item.seller, address: item.address, desc: item.desc);
         }));
-    },
+      },
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
           Container(
-            height: height-50, 
-            width: width,
+            height: MediaQuery.of(context).size.height-644, 
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               boxShadow: [new BoxShadow(
               color: Colors.grey[400],
@@ -128,10 +135,10 @@ GestureDetector buildProductView(String type, String image, String title, BuildC
               borderRadius: BorderRadius.circular(20),
               child: Column(
                 children: [
-                  Image.asset("assets/images/vegetable$image.jpg", fit: BoxFit.cover),
+                  Image.asset("${item.images}", fit: BoxFit.cover),
                   Expanded(child: Container(
-                    height: height/3,
-                    width: width,
+                    height: MediaQuery.of(context).size.height/3, 
+                    width: MediaQuery.of(context).size.width/2.5,
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.only(
@@ -143,14 +150,12 @@ GestureDetector buildProductView(String type, String image, String title, BuildC
                       children: [
                         SizedBox(height:10.0),
                         Text(
-                        '${title.toUpperCase()}\nRs.$price for $qty kg',
+                        '${item.title.toUpperCase()}\nRs.${item.price} for ${item.qty}',
                         style: TextStyle(fontSize: 20.0, )
                         ),
-
                       ]
                       ))
                   )
-                  
                 ],
               )
             ),
@@ -159,5 +164,5 @@ GestureDetector buildProductView(String type, String image, String title, BuildC
       ),
     ),
   );
+  }
 }
-
