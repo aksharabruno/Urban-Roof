@@ -54,7 +54,11 @@ class CheckoutCard extends StatelessWidget{
                 Spacer(),
                 FlatButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/confirmaddress');
+                    if(addedList.length == 0){
+
+                    }
+                    else{
+                    Navigator.pushReplacementNamed(context, '/receipt');}
                   }, 
                   child: Row(children: [
                     Text("Proceed to checkout", style: TextStyle(color: Colors.black,)),
