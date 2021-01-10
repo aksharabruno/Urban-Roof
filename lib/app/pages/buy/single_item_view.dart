@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class Product {
   final int id;
   final String title, seller, address, qty, type;
-  final List<String> images;
+  final String images;
   final price;
   final String phone;
 
@@ -46,12 +46,13 @@ List<Added> addedList = [];
 
 
 class CartCounter extends StatefulWidget {
+  
   @override
   _CartCounterState createState() => _CartCounterState();
 }
-
+int numOfItems = 1;
 class _CartCounterState extends State<CartCounter> {
-  int numOfItems = 1;
+  
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -110,7 +111,7 @@ class SingleItemView extends StatelessWidget {
   final String image;
   final String title;
   final BuildContext context;
-  final double qty;
+  final String qty;
   final double price;
   final String seller;
   final String address;
@@ -121,12 +122,13 @@ class SingleItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool cond = true;
+    int n = 1;
+    _CartCounterState c = new _CartCounterState();
     
-    int n = 0;
     return Scaffold(
         body: Stack(
       children: [
-        Image.asset("assets/images/$type$image.jpg",
+        Image.asset("$image",
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
             height: MediaQuery.of(context).size.height / 1.5),
@@ -173,7 +175,7 @@ class SingleItemView extends StatelessWidget {
                 ),
                 SizedBox(height:18.0),
                 Text(
-                  'Description: We need a small description here',
+                  'Description: Fresh $type',
                   textAlign: TextAlign.left,
                   style: TextStyle(color: Colors.black, fontSize: 17.0),
                 ),
@@ -186,7 +188,7 @@ class SingleItemView extends StatelessWidget {
                 ),
                 
                 Text(
-                  'Address: this should be seller address',
+                  'Address: selleraddress',
                   textAlign: TextAlign.left,
                   style: TextStyle(color: Colors.black, fontSize: 17.0),
                 ),
@@ -217,21 +219,20 @@ class SingleItemView extends StatelessWidget {
             child:Row(
               mainAxisAlignment:MainAxisAlignment.spaceEvenly,
               children: [
-              FlatButton.icon(onPressed: (){
-                _CartCounterState c = new _CartCounterState();
-                n = c.totalnumber();
+              FlatButton.icon(onPressed: (){               
                 Product p = new Product(
                   id: 1,
                   title: title,
                   seller: seller,
                   address: 'some address',
                   qty: '$qty',
-                  images: ["assets/images/$type$image.jpg"],
+                  images: "$image",
                   price: price,
                   phone: '9999999999',
                   type: type
                 );
-                Added obj = new Added(product: (p), numOfItem: n);
+                n = c.totalnumber();
+                Added obj = new Added(product: (p), numOfItem: numOfItems);
                 addedList.addAll({obj});
                 setState(() { 
                   cond = false;
@@ -265,6 +266,7 @@ showAlertDialog(BuildContext context){
     
     child: Icon(Icons.check, color: Colors.green[900],),
     onPressed: () {
+      numOfItems = 1;
       Navigator.of(context).pop();
     },
   );
