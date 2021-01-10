@@ -69,9 +69,53 @@ class _Todo extends State<Todo> {
             maxChildSize: 0.85,
             minChildSize: 0.1,
             builder: (BuildContext context, ScrollController scrolController) {
+              if(tasks.length == 0){
+                return Stack(
+                  overflow: Overflow.visible,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                    padding: EdgeInsets.all(30),
+                    height: MediaQuery.of(context).size.height/2,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(40),
+                          topLeft: Radius.circular(40)),
+                      ),
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(20),
+                        height: 100.0,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.green),
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        child: Expanded(child:Text('Add new tasks to keep things on track and increase productivity!',
+                              style: TextStyle(fontSize: 16),
+                              textAlign: TextAlign.center,),
+                    ),),),
+                    Positioned(
+                    child: FloatingActionButton(
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                      backgroundColor: Colors.black,
+                      onPressed: () {_openPopup(context);},
+                    ),
+                    top: -30,
+                    right: 30,
+                  )
+                    ],
+                );
+              }
+              else{
               return Stack(
                 overflow: Overflow.visible,
                 children: <Widget>[
+                  
                   Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
@@ -80,6 +124,7 @@ class _Todo extends State<Todo> {
                           topRight: Radius.circular(40),
                           topLeft: Radius.circular(40)),
                     ),
+                  
                     child: ListView.builder(
                       itemCount: tasks.length,
                       itemBuilder: (context, index) => Padding(
@@ -111,7 +156,7 @@ class _Todo extends State<Todo> {
                         ),
                         controller: scrolController,
                       )
-                  ),
+            ),
                   Positioned(
                     child: FloatingActionButton(
                       child: Icon(
@@ -119,18 +164,15 @@ class _Todo extends State<Todo> {
                         color: Colors.white,
                       ),
                       backgroundColor: Colors.black,
-                      onPressed: () {
-                        print('hi');
-                        _openPopup(context);
-                      },
+                      onPressed: () {_openPopup(context);},
                     ),
                     top: -30,
                     right: 30,
                   )
                 ],
-              );
-            },
-          )
+              );}
+            }
+            )
         ],
       ),
     );
