@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'constants.dart';
 //import 'package:urban_roof/app/pages/home.dart';
 Widget builddrawerelement(BuildContext context){
     return Drawer(
@@ -26,14 +28,15 @@ Widget builddrawerelement(BuildContext context){
                 ),
                 SizedBox(height: 20.0),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'name',
-                      //'$name',
+                      
+                      '$name',
                       style: TextStyle(color: Colors.white, fontSize: 18.0),
                       textAlign: TextAlign.left,
                     ),
-                    SizedBox(width:175.0),
+                    
                     IconButton(
                       icon: Icon(Icons.arrow_forward_sharp, color: Colors.white), 
                       onPressed: () {Navigator.pushReplacementNamed(context, '/profile');})
