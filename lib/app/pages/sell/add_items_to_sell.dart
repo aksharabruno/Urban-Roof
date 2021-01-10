@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:urban_roof/app/common/common_widgets.dart';
-/*import 'dart:io';
+import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';*/
+import 'package:image_picker/image_picker.dart';
 
 class AddItemsToSell extends StatefulWidget{
   @override
@@ -57,7 +57,7 @@ class _AddItemsToSell extends State<AddItemsToSell> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     buildContainerBottomNav(Icons.ballot, 'allitems', context, isSelected: true),
-                    buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
+                    //buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
                     buildContainerBottomNav(Icons.home, 'home', context),
                     buildContainerBottomNav(Icons.person, 'profile', context),
                     buildContainerBottomNav(Icons.shopping_cart, 'maincategory', context),
@@ -202,7 +202,18 @@ class _AddItemsToSell extends State<AddItemsToSell> {
             SizedBox(height: 40.0),
             RaisedButton(
               //onPressed: chooseImage,
-              onPressed: () {},
+              onPressed: () {
+                /*if (_imageFile != null) {
+                  var stream =
+                      http.ByteStream(DelegatingStream.typed(_imageFile.openRead()));
+                  var length = await _imageFile.length();
+                  var multipartFile = http.MultipartFile('file', stream, length,
+                      filename: basename(_imageFile.path));
+                  request.files.add(multipartFile);
+                }
+                request.fields['token'] = token
+                var response = await request.send();*/
+              },
               color: Colors.green[100],
               child: Text('Choose Image', style: TextStyle(fontSize: 15.0),),
               shape: RoundedRectangleBorder(
