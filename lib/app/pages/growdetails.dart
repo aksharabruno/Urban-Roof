@@ -9,19 +9,17 @@ class GrowDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-         alignment: Alignment.topCenter,
+       
       children: [
         
         Image.asset("assets/images/crop$image.JPG",
-         
-            width: MediaQuery.of(context).size.width/2,
-            fit: BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height /3),
-        IconButton(
+       IconButton(
           padding: EdgeInsets.only(left: 10, top: 30),
           icon: Icon(
             Icons.close,
-            color: Colors.white,
+            color: Colors.black,
           ),
           onPressed: () {
             Navigator.of(context).pop();
