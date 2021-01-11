@@ -55,8 +55,6 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          //'/': (BuildContext context) => ShopItemsWidget(),
-          //'/checkout': (BuildContext context) => Checkout(),
           '/': (context) => FirstPage(),
           '/signup': (context) => SignupPage(),
           '/home': (context) => HomePage(),
