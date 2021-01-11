@@ -39,12 +39,7 @@ class MyNotif extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.green,
           elevation: 0,
-          leading: Builder(builder: (BuildContext context) {
-            return IconButton(
-              icon: Container(child: Icon(Icons.menu)),
-              onPressed: () {},
-            );
-          }),
+         
           title: Text(
             "NOTIFICATIONS",
           ),
@@ -81,15 +76,19 @@ class MyNotif extends StatelessWidget {
               height: 13,
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(115.0),
+                  padding: const EdgeInsets.all(15.0),
                   alignment: Alignment.center,
-                  child: Text("No new notifications",
+                  child:
+                   Text("No new notifications",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: 0.5,
+                        
                       )),
                 ),
               ],
