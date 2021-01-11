@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'package:urban_roof/app/bloc/cart_items_block.dart';
 import 'package:urban_roof/app/common/common_widgets.dart';
+import 'package:urban_roof/app/common/constants.dart';
 import 'growdetails.dart';
 
 class MyCrops extends StatelessWidget {
@@ -25,13 +26,12 @@ class MyCrops extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 buildContainerBottomNav(Icons.ballot, 'allitems', context),
-                buildContainerBottomNav(
-                    Icons.notifications_on_rounded, 'notification', context),
-                buildContainerBottomNav(Icons.home, 'home', context),
+                //buildContainerBottomNav(Icons.notifications_on_rounded, 'notification', context),
+                buildContainerBottomNav(Icons.home, 'home', context, isSelected: true),
                 buildContainerBottomNav(Icons.person, 'profile', context),
                 buildContainerBottomNav(
                     Icons.shopping_cart, 'maincategory', context,
-                    isSelected: true),
+                    ),
               ],
             ),
           )),
@@ -85,12 +85,12 @@ class CatalogList extends StatelessWidget {
             mainAxisSpacing: 1,
             crossAxisCount: 2,
             children: <Widget>[
-              buildProductView('3', 'Peas', context, itemHeight, itemWidth),
-              buildProductView('4', 'Chilli', context, itemHeight, itemWidth),
-              buildProductView('6', 'Tomato',context, itemHeight, itemWidth),
-              buildProductView('2', 'Brinjal', context, itemHeight, itemWidth),
-              buildProductView( '5', 'Spinach',context, itemHeight, itemWidth),
-              buildProductView('1', 'Okra', context, itemHeight, itemWidth),
+              buildProductView('3', 'Peas', context, itemHeight, itemWidth, 'https://www.roysfarm.com/growing-peas/', peastext),
+              buildProductView('4', 'Chilli', context, itemHeight, itemWidth, 'https://www.lovethegarden.com/uk-en/article/how-grow-chillies#:~:text=Soak%20chilli%20seeds%20overnight%20in%20warm%20water%20before,for%20a%20couple%20of%20days%20to%20improve%20germination.', chillitext),
+              buildProductView('6', 'Tomato',context, itemHeight, itemWidth, 'https://www.allthatgrows.in/blogs/posts/how-to-grow-tomatoes-at-home-in-india', tomatotext),
+              buildProductView('2', 'Brinjal', context, itemHeight, itemWidth, 'https://gardeningtips.in/growing-brinjal-in-pots-eggplant-at-home#:~:text=%20Plantation%20of%20seeds%20for%20growing%20brinjal%20in,sprout.%20When%20you%20plant%20more%20than...%20More', brinjaltext),
+              buildProductView( '5', 'Spinach',context, itemHeight, itemWidth, 'https://www.thespruce.com/growing-spinach-1403448#:~:text=Sow%20the%20spinach%20seeds%20thinly%20in%20rows%20spaced,thin%20the%20plants%20to%20about%206%20inches%20apart.', spinachtext),
+              buildProductView('1', 'Okra', context, itemHeight, itemWidth, 'https://gardentroubles.com/grow-lady-finger-plant-pot-home/', okratext),
             ],
           ),
         ),
@@ -100,11 +100,11 @@ class CatalogList extends StatelessWidget {
 }
 
 GestureDetector buildProductView(String image, String title,
-    BuildContext context, double height, double width) {
+    BuildContext context, double height, double width, String link, String text) {
   return GestureDetector(
     onTap: () {
       Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        return GrowDetailsPage(image: image, title: title, context: context);
+        return GrowDetailsPage(image: image, title: title, context: context, link: link, text: text);
       }));
     },
     child: Padding(
