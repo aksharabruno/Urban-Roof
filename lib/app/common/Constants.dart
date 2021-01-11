@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:urban_roof/app/pages/size_config.dart';
 
-
 class Person {
   String name;
   String address;
@@ -82,3 +81,10 @@ OutlineInputBorder outlineInputBorder() {
     borderSide: BorderSide(color: kTextColor),
   );
 }
+
+String brinjaltext = 'Preparation of pot:\n\nYou will need one pot for two seeds respectively. If you prefer to use seedling trays and other types of Pots which are made of plastic, then it would be...';
+String tomatotext = 'Seed Starting and Germination\n\nTomatoes are a warm-season crop and are usually grown as summer annuals. Tomato seeds must be started indoors between March to June. Here’s how...';
+String okratext = 'When to Grow Lady Finger in India?\n\n(Feb – March, Late July-Early Aug)\nLady fingers grow best in sunlight, so summer is the best time to grow it but apart from that any season...';
+String peastext = 'Best time for growing peas\n\nPeas are actually a cool-season crop with a life cycle of one year. Depending on location, winter to early summer is the best time for growing peas...';
+String spinachtext = 'How to Plant Spinach\n\nYou can start spinach indoors or direct seed it in the garden as soon as the soil is workable. Spinach grows quite quickly, so don\'t start plants indoors...';
+String chillitext = 'Tips for growing chillies\n\nLeave fruits to turn a rich red colour for a hotter taste. The hotter the variety the longer the whole growing process will take (from germination...';
